@@ -6,46 +6,45 @@ import { default as axios } from "axios";
 
 function PokemonCard( { endpoint } ) {
 
-    const [card, setCard] = useState("")
+    const [ card, setCard ] = useState( "" )
 
-    useEffect(() => {
+    useEffect( () => {
 
-        async function fetchData(){
-            try{
-                const result =  await axios.get( `${endpoint }` )
+        async function fetchData() {
+            try {
+                const result = await axios.get( `${ endpoint }` )
 
-                console.log(result)
+                console.log( result )
 
-                setCard(result.data)
-            }catch(e)  {
-                console.error(e)
+                setCard( result.data )
+            } catch ( e ) {
+                console.error( e )
             }
         }
 
         fetchData()
 
-    }, [])
-
+    }, [] )
 
 
     return (
         <div className="pokemonCard">
 
             { card &&
-                <>
-            <h2>{ card.name }</h2>
-            <img src={card.sprites.back_default} alt=""/>
+            <>
+                <h2>{ card.name }</h2>
+                <img src={ card.sprites.back_default } alt=""/>
                 <h4>Moves</h4>
                 <p>{ card.moves.length }</p>
-            <h4>Weight</h4>
-            <p>{ card.weight }</p>
-            <h4>Abilities</h4>
-            <ul>
-                {card.abilities.map((ability) => {
-                    return <li key={ability.slot}> {ability.ability.name}</li>
-                })}
-            </ul>
-                </>
+                <h4>Weight</h4>
+                <p>{ card.weight }</p>
+                <h4>Abilities</h4>
+                <ul>
+                    { card.abilities.map( ( ability ) => {
+                        return <li key={ ability.slot }> { ability.ability.name }</li>
+                    } ) }
+                </ul>
+            </>
             }
         </div>
     );
